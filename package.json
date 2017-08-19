@@ -1,0 +1,9 @@
+{
+  "name": "game-of-life",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Oleg Polyakov",
+  "scripts": {
+    "test": "jest"
+  }
+}
