@@ -17,27 +17,26 @@ describe('createCell', () => {
 describe('countNeighbors', () => {
     test('countNeighbors(grid, cell) - возращает возвращает количетсво соседей клетки', () => {
         let grid = [
-            [
-                { row: 0, col: 0, alive: false },
-                { row: 0, col: 1, alive: true },
-                { row: 0, col: 2, alive: true },
-            ],
-            [
-                { row: 1, col: 0, alive: true },
-                { row: 1, col: 1, alive: true },
-                { row: 1, col: 2, alive: false },
-            ],
-            [
-                
-                { row: 2, col: 0, alive: true },
-                { row: 2, col: 1, alive: false },
-                { row: 2, col: 2, alive: true },
-            ]
+            [{ row: 0, col: 0, alive: false },
+            { row: 0, col: 1, alive: true },
+            { row: 0, col: 2, alive: true },],
+            [{ row: 1, col: 0, alive: true },
+            { row: 1, col: 1, alive: true },
+            { row: 1, col: 2, alive: false },],
+            [{ row: 2, col: 0, alive: true },
+            { row: 2, col: 1, alive: false },
+            { row: 2, col: 2, alive: true },]
         ];
-        let cell = { row: 1, col: 1, alive: true };
-        let neighbors = countNeighbors(grid, cell);
 
-        expect(neighbors).toBe(5);
+        expect(countNeighbors(grid, { row: 0, col: 0, alive: true })).toBe(3);
+        expect(countNeighbors(grid, { row: 0, col: 1, alive: true })).toBe(3);
+        expect(countNeighbors(grid, { row: 0, col: 2, alive: true })).toBe(2);
+        expect(countNeighbors(grid, { row: 1, col: 0, alive: true })).toBe(3);
+        expect(countNeighbors(grid, { row: 1, col: 1, alive: true })).toBe(5);
+        expect(countNeighbors(grid, { row: 1, col: 2, alive: true })).toBe(4);
+        expect(countNeighbors(grid, { row: 2, col: 0, alive: true })).toBe(2);
+        expect(countNeighbors(grid, { row: 2, col: 1, alive: true })).toBe(4);
+        expect(countNeighbors(grid, { row: 2, col: 2, alive: true })).toBe(1);
     });
 });
 
