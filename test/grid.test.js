@@ -15,7 +15,7 @@ describe('createCell', () => {
 });
 
 describe('countNeighbors', () => {
-    test('countNeighbors(grid, cell) - возращает возвращает количетсво соседей клетки', () => {
+    test('countNeighbors(grid, cell) - возвращает количетсво соседей клетки', () => {
         let grid = [
             [{ row: 0, col: 0, alive: false },
             { row: 0, col: 1, alive: true },
