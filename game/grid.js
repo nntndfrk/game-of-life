@@ -106,7 +106,7 @@ function computeGrid(grid) {
                     nextGrid[r][c].alive = false;
                 }
             } else {
-                if (numNeighbors == 3) {
+                if (numNeighbors === 3) {
                     nextGrid[r][c].alive = true; // cell becomes alive
                 }
             }
