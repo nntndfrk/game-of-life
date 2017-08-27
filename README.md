@@ -1,6 +1,6 @@
 # Game of Life (Игра)
 
-## Версия на Node.js
+## Версия для Node.js
 
 Начало
 
