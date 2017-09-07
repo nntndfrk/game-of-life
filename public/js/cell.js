@@ -1,29 +1,32 @@
 class Cell {
     constructor({ element, row, col, alive = false }) {
-        // опредлить свойства
-
-        // доинициализировать свойства в методе `init`
+        this.element = document.createElement('td');
+        this.row = row;
+        this.col = col;
+        this._alive = alive;
         this.init();
     }
 
     get alive() {
-        // вернуть состояние клетки
+        return this._alive;
     }
 
     set alive(value) {
-        // обвновить состояние клетки
-        
-        // если клетка жива, присвоить класс `alive`
-        // в противном случае убрать класс `alive`
+        this._alive = value
+        if (this._alive) {
+            this.element.classList.add('alive');
+        } else {
+            this.element.classList.remove('alive');
+        }
     }
 
     init() {
-        // элементу присвоить класс `cell`
-        // если клетка жива присвоить ей класс `alive`
-        // подписаться на событие `click` у элемента
+        this.element.className = 'cell';
+        if (this.alive) this.element.classList.add('alive');
+        this.element.addEventListener('click', this.handleClick.bind(this));
     }
 
     handleClick(event) {
-        // при нажатии на клетку изменить ее состояние
+        this.alive = !this.alive;
     }
 }

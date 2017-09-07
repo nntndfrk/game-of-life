@@ -1,67 +1,74 @@
 class Game {
     constructor({ element, grid }) {
-        // определить свойства
-
-        // доинициализировать свойства в методе `init`
+        this.element = element;
+        this.grid = grid;
+        this.isPlaying = false;
+        this.speed = 0;
+        this.init();
     }
 
     init() {
-        // сохранить кнопку Play в свойство и подписаться на событие `click`
-
-        // сохранить кнопку Reset в свойство и подписаться на событие `click`
-
-        // сохранить кнопку Random в свойство и подписаться на событие `click`
-
-        // сохранить слайдер Speed в свойство и подписаться на событие `input`
+        this.playButton = document.querySelector('#play-button');
+        this.playButton.addEventListener('click', this.handlePlayButtonClick.bind(this));
+        this.resetButton = document.querySelector('#reset-button');
+        this.resetButton.addEventListener('click', this.handleResetButtonClick.bind(this));
+        this.randomButton = document.querySelector('#randomize-button');
+        this.randomButton.addEventListener('click', this.handleRandomizeButtonClick.bind(this));
+        this.speedSlider = document.querySelector('#speed-slider');
+        this.speedSlider.addEventListener('input', this.handleSpeedSliderChange.bind(this));
     }
 
     play() {
-        // отметить что игра в процессе
-        // изменить содержимое кнопки Play на pause (название икноки)
-        // высчитать следующее поколение клеток
+        this.isPlaying = true;
+        this.playButton.textContent = 'pause';
+        this.grid.next();
     }
 
     pause() {
-        // отметить что игра присотановлена
-        // изменить содержимое кнопки Play на play_arrow (название икноки)
-        // очистить интервал
+        this.isPlaying = false;
+        this.playButton.textContent = 'play_arrow';
+        clearInterval(this.interval);
     }
 
     reset() {
-        // отметить что игра присотановлена
-        // изменить содержимое кнопки Play на play_arrow (название икноки)
-        // сбросить состояние клетки
-        // обнулить слайдер
-        // обнулить скорость
-        // очистить интервал
+        this.isPlaying = false;
+        this.playButton.textContent = 'play_arrow';
+        this.grid.reset();
+        this.speedSlider.value = 0;
+        this.speed = 0;
+        clearInterval(this.interval);
     }
 
-    randomize() {
-        // если игра в процсее, то ничего делать не нужно
-
-        // сбросить игру
-        // опредлить случайное сосояние сетки
+    randomize(event) {
+        if (this.isPlaying) {
+            event.preventDefault();
+        } else {
+            this.reset();
+            this.grid.randomize();
+        }
     }
 
     handlePlayButtonClick(event) {
-        // если игра в процессе
-            // приостановить игру
-        // в противном случае
-            // играть
-            // запустить интервал обновления
+        if (this.isPlaying) {
+            this.pause();
+        } else {
+            this.play();
+            this.interval = setInterval(this.play.bind(this), 1000 - this.speed);
+        }
     }
 
     handleResetButtonClick(event) {
-        // обнулить игру
+        this.reset();
     }
 
     handleRandomizeButtonClick(event) {
-        // определить случайное состояние для игры
+        this.randomize(event);
     }
 
     handleSpeedSliderChange(event) {
-        // получить значение слайдера
-        // очистить интервал
-        // запустить интервал с новой скоростью
+        let sliderVal = event.target.value;
+        this.speed = sliderVal;
+        clearInterval(this.interval);
+        this.interval = setInterval(this.play.bind(this), 1000 - this.speed);
     }
 }
